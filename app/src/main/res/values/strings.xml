@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Game Box</string>
+    <string name="loading">Loading...</string>
+    <string name="donate">Пожертвовать на развитие</string>
+</resources>
