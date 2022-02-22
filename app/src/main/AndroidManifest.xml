@@ -13,6 +13,9 @@
             android:name="com.example.ticTacToeGame.MainActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.ticTacToeGame.TicTacToeActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.ticTacToeGame.LoadingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">

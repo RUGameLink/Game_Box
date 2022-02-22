@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,6 +16,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var donateButton: Button
+    lateinit var ticTacToeButton: Button
+
     lateinit var star1Image: ImageView
     lateinit var star2Image: ImageView
     lateinit var moonImage: ImageView
@@ -27,8 +28,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
-        donateButton.setOnClickListener(myButtonClickListener);
+        donateButton.setOnClickListener(myButtonClickListener)
+        ticTacToeButton.setOnClickListener(ticTacToeListener)
         checkaDate()
+    }
+
+    var ticTacToeListener: View.OnClickListener = View.OnClickListener {
+        ticTacToeShow()
     }
 
     var myButtonClickListener: View.OnClickListener = View.OnClickListener {
@@ -42,12 +48,19 @@ class MainActivity : AppCompatActivity() {
         startActivity(i)
     }
 
+    fun ticTacToeShow(){
+        val i = Intent(this, TicTacToeActivity::class.java)
+        startActivity(i)
+
+    }
+
     fun init(){
-        donateButton = findViewById<TextView>(R.id.donatButton) as Button
+        donateButton = findViewById<TextView>(R.id.donateButton) as Button
         star1Image = findViewById<TextView>(R.id.starView1) as ImageView
         star2Image = findViewById<TextView>(R.id.starView2) as ImageView
         moonImage = findViewById<TextView>(R.id.moonView) as ImageView
         sunnImage = findViewById<TextView>(R.id.sunnView) as ImageView
+        ticTacToeButton = findViewById<TextView>(R.id.ticTacToeButton) as Button
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

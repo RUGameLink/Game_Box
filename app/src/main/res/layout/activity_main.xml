@@ -8,13 +8,13 @@
     tools:context="com.example.ticTacToeGame.MainActivity">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/donateButton"
         style="@style/Widget.MaterialComponents.Button.Icon"
-        android:id="@+id/donatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange2"
         android:text="@string/donate"
         app:cornerRadius="15px"
-        android:backgroundTint="@color/orange2"
         app:icon="@drawable/donation"
         app:iconSize="64px"
         app:iconTint="@null"
@@ -25,6 +25,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.82"
         app:rippleColor="@color/orange1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ticTacToeButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="305dp"
+        android:layout_height="46dp"
+        android:backgroundTint="@color/turquoise_green"
+        android:text="@string/tic_tac_toe"
+        app:cornerRadius="15px"
+        app:icon="@drawable/tictactoe"
+        app:iconSize="64px"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.692"
+        app:rippleColor="@color/deep_green" />
 
     <ImageView
         android:id="@+id/moonView"
