@@ -55,12 +55,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun init(){
-        donateButton = findViewById<TextView>(R.id.donateButton) as Button
-        star1Image = findViewById<TextView>(R.id.starView1) as ImageView
-        star2Image = findViewById<TextView>(R.id.starView2) as ImageView
-        moonImage = findViewById<TextView>(R.id.moonView) as ImageView
-        sunnImage = findViewById<TextView>(R.id.sunnView) as ImageView
-        ticTacToeButton = findViewById<TextView>(R.id.ticTacToeButton) as Button
+        donateButton = findViewById(R.id.donateButton)
+        star1Image = findViewById(R.id.starView1)
+        star2Image = findViewById(R.id.starView2)
+        moonImage = findViewById(R.id.moonView)
+        sunnImage = findViewById(R.id.sunnView)
+        ticTacToeButton = findViewById(R.id.ticTacToeButton)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

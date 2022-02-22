@@ -3,4 +3,6 @@
     <string name="loading">Loading...</string>
     <string name="donate">Пожертвовать на развитие</string>
     <string name="tic_tac_toe">Крестики-нолики</string>
+    <string name="turnOne">Ходит первый игрок</string>
+    <string name="turnTwo">Ходит второй игрок</string>
 </resources>
