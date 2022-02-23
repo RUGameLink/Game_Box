@@ -1,10 +1,18 @@
 package com.example.ticTacToeGame
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storybook.R
+
+import android.media.MediaPlayer
+import android.os.Build
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+
 
 class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var b0: Button
@@ -17,6 +25,16 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var b7: Button
     lateinit var b8: Button
 
+    lateinit var turnView: TextView
+
+    lateinit var mp: MediaPlayer
+
+    var playerOne = 0
+    var playerTwo = 1
+    var activePlayer = playerOne
+
+    lateinit var filledPosition: IntArray
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tictactoe)
@@ -25,6 +43,8 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun init(){
+        filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1)
+
         b0 = findViewById(R.id.b0)
         b1 = findViewById(R.id.b1)
         b2 = findViewById(R.id.b2)
@@ -34,10 +54,37 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         b6 = findViewById(R.id.b6)
         b7 = findViewById(R.id.b7)
         b8 = findViewById(R.id.b8)
+
+        mp = MediaPlayer.create(this, R.raw.pencil);
+
+        turnView = findViewById(R.id.turnView)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onClick(p0: View?) {
+
         var btnClicked = findViewById<Button>(p0!!.id)
+        var clickTagDetector = Integer.parseInt(btnClicked.tag.toString())
+
+        if(filledPosition[clickTagDetector] != -1)
+            return
+
+        filledPosition[clickTagDetector] = activePlayer
+
+        mp.start()
+
+        when(activePlayer){
+            playerOne -> {btnClicked.setText("X")
+                activePlayer = playerTwo
+                turnView.setText(R.string.turnTwo)
+                btnClicked.backgroundTintList=getColorStateList(R.color.crimson)
+            }
+            playerTwo -> {btnClicked.setText("O")
+                activePlayer = playerOne
+                turnView.setText(R.string.turnOne)
+                btnClicked.backgroundTintList=getColorStateList(R.color.lime_green)
+            }
+        }
     }
 
     fun initListener(){

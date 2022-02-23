@@ -12,4 +12,6 @@
     <color name="nightfall">#0e518b</color>
     <color name="turquoise_green">#1E5945</color>
     <color name="deep_green">#004524</color>
+    <color name="crimson">#DC143C</color>
+    <color name="lime_green">#32CD32</color>
 </resources>
