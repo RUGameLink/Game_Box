@@ -5,4 +5,8 @@
     <string name="tic_tac_toe">Крестики-нолики</string>
     <string name="turnOne">Ходит первый игрок</string>
     <string name="turnTwo">Ходит второй игрок</string>
+    <string name="playerOneWin">Первый игрок выиграл</string>
+    <string name="playerTwoWin">Второй игрок выиграл</string>
+    <string name="restartButton">Перезапуск</string>
+    <string name="drawGame">Ничья</string>
 </resources>
