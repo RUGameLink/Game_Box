@@ -9,4 +9,5 @@
     <string name="playerTwoWin">Второй игрок выиграл</string>
     <string name="restartButton">Перезапуск</string>
     <string name="drawGame">Ничья</string>
+    <string name="back">Назад</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.ticTacToeGame
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -26,6 +27,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var b8: Button
 
     lateinit var restartButton: Button
+    lateinit var backButton: Button
 
     lateinit var turnView: TextView
 
@@ -45,6 +47,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_tictactoe)
         init()
         restartButton.setOnClickListener(restartGameListener)
+        backButton.setOnClickListener(backListener)
         filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1) //Массив отслеживания активированных кнопок
         initListener()
     }
@@ -62,6 +65,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         b8 = findViewById(R.id.b8)
 
         restartButton = findViewById(R.id.restartButton)
+        backButton = findViewById(R.id.backButton)
 
         mp = MediaPlayer.create(this, R.raw.pencil);
 
@@ -71,6 +75,11 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.M)
     var restartGameListener: View.OnClickListener = View.OnClickListener {
         restartingGame()
+    }
+
+    var backListener: View.OnClickListener = View.OnClickListener {
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -116,9 +125,6 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
             var val0 = winPosition[i][0]
             var val1 = winPosition[i][1]
             var val2 = winPosition[i][2]
-        //    println(winPosition[i][0])
-       //     println(val1)
-        //    println(val2)
 
             if(filledPosition[val0] == filledPosition[val1] && filledPosition[val1] == filledPosition[val2]){
                 if(filledPosition[val0] != -1) {
@@ -131,6 +137,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
                     return
                 }
             }
+
         }
 
         var count = 0
@@ -143,6 +150,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         if(count == 0){
             turnView.setText(R.string.drawGame)
         }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

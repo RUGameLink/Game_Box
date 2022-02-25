@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storybook.R
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun init(){
-        donateButton = findViewById(R.id.donateButton)
+        donateButton = findViewById(R.id.backButton)
         star1Image = findViewById(R.id.starView1)
         star2Image = findViewById(R.id.starView2)
         moonImage = findViewById(R.id.moonView)
