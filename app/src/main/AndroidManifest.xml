@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryBook">
         <activity
-            android:name="com.example.ticTacToeGame.MainActivity"
+            android:name="com.example.ticTacToeGame.Activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.ticTacToeGame.TicTacToeActivity"
+            android:name="com.example.ticTacToeGame.Activity.TicTacToeActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.ticTacToeGame.LoadingActivity"
+            android:name="com.example.ticTacToeGame.Activity.SoundPadActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.ticTacToeGame.Activity.LoadingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.example.ticTacToeGame
+package com.example.ticTacToeGame.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nightfall"
+    tools:context="com.example.ticTacToeGame.Activity.SoundPadActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rainButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/back"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/rain"
+        app:iconGravity="top"
+        app:iconSize="120px"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373"
+        app:rippleColor="@color/purple_200" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="310dp"
+        android:layout_height="47dp"
+        android:backgroundTint="@color/orange2"
+        android:text="@string/back"
+        app:cornerRadius="15px"
+        app:icon="@drawable/back"
+        app:iconSize="64px"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94"
+        app:rippleColor="@color/orange1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bonfireButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/back"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/bonfire"
+        app:iconGravity="top"
+        app:iconSize="120px"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373"
+        app:rippleColor="@color/purple_200" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
