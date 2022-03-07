@@ -92,6 +92,7 @@
 
             <Button
                 android:id="@+id/b0"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -101,6 +102,7 @@
 
             <Button
                 android:id="@+id/b1"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -110,6 +112,7 @@
 
             <Button
                 android:id="@+id/b2"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -127,6 +130,7 @@
 
             <Button
                 android:id="@+id/b3"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -136,6 +140,7 @@
 
             <Button
                 android:id="@+id/b4"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -145,6 +150,7 @@
 
             <Button
                 android:id="@+id/b5"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -162,6 +168,7 @@
 
             <Button
                 android:id="@+id/b6"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -171,6 +178,8 @@
 
             <Button
                 android:id="@+id/b7"
+                android:textAllCaps="true"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -180,6 +189,7 @@
 
             <Button
                 android:id="@+id/b8"
+                android:fontFamily="@font/tt_backwards_script_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
