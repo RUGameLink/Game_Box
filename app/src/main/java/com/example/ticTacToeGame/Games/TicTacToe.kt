@@ -11,7 +11,7 @@ class TicTacToe {
 
     private var gameActive: Boolean
 
-    lateinit var filledPosition: IntArray
+    private var filledPosition: IntArray
 
     constructor(){
         playerOne = 0
@@ -19,18 +19,6 @@ class TicTacToe {
         filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1)
         activePlayer = playerOne
         gameActive = true
-    }
-
-    fun getPlayer(): Int{
-        return activePlayer
-    }
-
-    fun setPlayerOneActive(){
-        activePlayer = playerOne
-    }
-
-    fun setPlayerTwoActive(){
-        activePlayer = playerTwo
     }
 
     fun checkForWins(): Int{
