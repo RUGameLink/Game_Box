@@ -32,9 +32,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var mp: MediaPlayer
 
-    var playerOne = 0
-    var playerTwo = 1
-    var activePlayer = playerOne
+
 
 
     var gameActive = true
@@ -49,7 +47,8 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         init()
         restartButton.setOnClickListener(restartGameListener)
         backButton.setOnClickListener(backListener)
-        filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1) //Массив отслеживания активированных кнопок
+    //    filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1) //Массив отслеживания активированных кнопок
+        ticTacToe = TicTacToe()
 
         initListener()
     }
@@ -86,32 +85,36 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onClick(p0: View?) {
-        if(!gameActive)
+        if(!ticTacToe.get())
             return
 
         var btnClicked = findViewById<Button>(p0!!.id)
         var clickTagDetector = Integer.parseInt(btnClicked.tag.toString())
 
-        if(filledPosition[clickTagDetector] != -1)
-            return
+        var check = ticTacToe.checkFilledPosition(clickTagDetector)
 
-        filledPosition[clickTagDetector] = activePlayer
+    //    if(check != -1)
+    //        return
 
-        mp.start() //Звуковое сопровождение
+            mp.start()
 
-        when(activePlayer){ //Смена хода
-            playerOne -> {btnClicked.setText("X")
-                activePlayer = playerTwo
-                turnView.setText(R.string.turnTwo)
-                btnClicked.backgroundTintList=getColorStateList(R.color.crimson) //Перекраска кнопки в цвет игрока
+            when(check){ //Смена хода
+                1 -> {btnClicked.setText("X")
+                    turnView.setText(R.string.turnTwo)
+                    btnClicked.backgroundTintList=getColorStateList(R.color.crimson) //Перекраска кнопки в цвет игрока
+                }
+                2 -> {btnClicked.setText("O")
+                    turnView.setText(R.string.turnOne)
+                    btnClicked.backgroundTintList=getColorStateList(R.color.lime_green)
+                }
             }
-            playerTwo -> {btnClicked.setText("O")
-                activePlayer = playerOne
-                turnView.setText(R.string.turnOne)
-                btnClicked.backgroundTintList=getColorStateList(R.color.lime_green)
-            }
-        }
-        println(filledPosition[clickTagDetector])
+
+    //    filledPosition[clickTagDetector] = activePlayer
+
+         //Звуковое сопровождение
+
+
+    //    println(filledPosition[clickTagDetector])
 
         paintingLine()
         checkForWins()
@@ -119,51 +122,22 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun checkForWins(){
-        var winPosition = arrayOf(intArrayOf(0, 1, 2), intArrayOf(3, 4, 5), intArrayOf(6, 7, 8),
-            intArrayOf(0, 3, 6), intArrayOf(1, 4, 7), intArrayOf(2, 5, 8),
-            intArrayOf(0, 4, 8), intArrayOf(2, 4, 6)) //Инициализация массива выигрышных комбинаций
+        var result = ticTacToe.checkForWins()
 
-        for (i in winPosition.indices){ //Обработка побед
-            var val0 = winPosition[i][0]
-            var val1 = winPosition[i][1]
-            var val2 = winPosition[i][2]
-
-            if(filledPosition[val0] == filledPosition[val1] && filledPosition[val1] == filledPosition[val2]){
-                if(filledPosition[val0] != -1) {
-                    gameActive = false
-                    if (filledPosition[val0] == playerOne) {
-                        turnView.setText(R.string.playerOneWin)
-                    } else {
-                        turnView.setText(R.string.playerTwoWin)
-                    }
-                    return
-                }
-            }
-
+        when(result){
+            1 -> turnView.setText(R.string.playerOneWin)
+            2 -> turnView.setText(R.string.playerTwoWin)
+            0 -> turnView.setText(R.string.drawGame)
         }
-
-        var count = 0
-
-        for(i in filledPosition.indices){//Обработка ничьи
-            if(filledPosition[i] == -1){
-                count++
-            }
-        }
-        if(count == 0){
-            turnView.setText(R.string.drawGame)
-        }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun restartingGame(){
-        filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1) //Массив отслеживания активированных кнопок
-        gameActive = true
+        ticTacToe = TicTacToe()
 
-        when(activePlayer){ //Смена хода
-            playerOne -> turnView.setText(R.string.turnOne)
-            playerTwo -> turnView.setText(R.string.turnTwo)
-        }
+        turnView.setText(R.string.turnOne)
+
+
 
         b0.text = ""
         b1.text = ""
@@ -188,45 +162,48 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun paintingLine(){
-        if(filledPosition[0] != -1 && filledPosition[0] == filledPosition[1] && filledPosition[1] == filledPosition[2]){
-            b0.backgroundTintList=getColorStateList(R.color.orange2)
-            b1.backgroundTintList=getColorStateList(R.color.orange2)
-            b2.backgroundTintList=getColorStateList(R.color.orange2)
-        }
-        else if(filledPosition[3] != -1 && filledPosition[3] == filledPosition[4] && filledPosition[4] == filledPosition[5]){
-            b3.backgroundTintList=getColorStateList(R.color.orange2)
-            b4.backgroundTintList=getColorStateList(R.color.orange2)
-            b5.backgroundTintList=getColorStateList(R.color.orange2)
-        }
-        else if(filledPosition[6] != -1 && filledPosition[6] == filledPosition[7] && filledPosition[7] == filledPosition[8]){
-            b6.backgroundTintList=getColorStateList(R.color.orange2)
-            b7.backgroundTintList=getColorStateList(R.color.orange2)
-            b8.backgroundTintList=getColorStateList(R.color.orange2)
-        }
-        else if(filledPosition[0] != -1 && filledPosition[0] == filledPosition[3] && filledPosition[3] == filledPosition[6]){
-            b0.backgroundTintList=getColorStateList(R.color.orange2)
-            b3.backgroundTintList=getColorStateList(R.color.orange2)
-            b6.backgroundTintList=getColorStateList(R.color.orange2)
-        }
-        else if(filledPosition[1] != -1 && filledPosition[1] == filledPosition[4] && filledPosition[4] == filledPosition[7]){
-            b1.backgroundTintList=getColorStateList(R.color.orange2)
-            b4.backgroundTintList=getColorStateList(R.color.orange2)
-            b7.backgroundTintList=getColorStateList(R.color.orange2)
-        }
-        else if(filledPosition[2] != -1 && filledPosition[2] == filledPosition[5] && filledPosition[5] == filledPosition[8]){
-            b2.backgroundTintList=getColorStateList(R.color.orange2)
-            b5.backgroundTintList=getColorStateList(R.color.orange2)
-            b8.backgroundTintList=getColorStateList(R.color.orange2)
-        }
-        else if(filledPosition[0] != -1 && filledPosition[0] == filledPosition[4] && filledPosition[4] == filledPosition[8]){
-            b0.backgroundTintList=getColorStateList(R.color.orange2)
-            b4.backgroundTintList=getColorStateList(R.color.orange2)
-            b8.backgroundTintList=getColorStateList(R.color.orange2)
-        }
-        else if(filledPosition[2] != -1 && filledPosition[2] == filledPosition[4] && filledPosition[4] == filledPosition[6]){
-            b2.backgroundTintList=getColorStateList(R.color.orange2)
-            b4.backgroundTintList=getColorStateList(R.color.orange2)
-            b6.backgroundTintList=getColorStateList(R.color.orange2)
+        var result = ticTacToe.paintLine()
+        when(result){
+            1 -> {
+                b0.backgroundTintList=getColorStateList(R.color.orange2)
+                b1.backgroundTintList=getColorStateList(R.color.orange2)
+                b2.backgroundTintList=getColorStateList(R.color.orange2)
+            }
+            2 -> {
+                b3.backgroundTintList=getColorStateList(R.color.orange2)
+                b4.backgroundTintList=getColorStateList(R.color.orange2)
+                b5.backgroundTintList=getColorStateList(R.color.orange2)
+            }
+            3 -> {
+                b6.backgroundTintList=getColorStateList(R.color.orange2)
+                b7.backgroundTintList=getColorStateList(R.color.orange2)
+                b8.backgroundTintList=getColorStateList(R.color.orange2)
+            }
+            4 -> {
+                b0.backgroundTintList=getColorStateList(R.color.orange2)
+                b3.backgroundTintList=getColorStateList(R.color.orange2)
+                b6.backgroundTintList=getColorStateList(R.color.orange2)
+            }
+            5 -> {
+                b1.backgroundTintList=getColorStateList(R.color.orange2)
+                b4.backgroundTintList=getColorStateList(R.color.orange2)
+                b7.backgroundTintList=getColorStateList(R.color.orange2)
+            }
+            6 -> {
+                b2.backgroundTintList=getColorStateList(R.color.orange2)
+                b5.backgroundTintList=getColorStateList(R.color.orange2)
+                b8.backgroundTintList=getColorStateList(R.color.orange2)
+            }
+            7 -> {
+                b0.backgroundTintList=getColorStateList(R.color.orange2)
+                b4.backgroundTintList=getColorStateList(R.color.orange2)
+                b8.backgroundTintList=getColorStateList(R.color.orange2)
+            }
+            8 -> {
+                b2.backgroundTintList=getColorStateList(R.color.orange2)
+                b4.backgroundTintList=getColorStateList(R.color.orange2)
+                b6.backgroundTintList=getColorStateList(R.color.orange2)
+            }
         }
     }
 
