@@ -1,4 +1,4 @@
-package com.example.ticTacToeGame
+package com.example.ticTacToeGame.Activity
 
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
@@ -16,6 +16,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     lateinit var donateButton: Button
     lateinit var ticTacToeButton: Button
+    lateinit var soundPadButton: Button
 
     lateinit var star1Image: ImageView
     lateinit var star2Image: ImageView
@@ -29,7 +30,12 @@ class MainActivity : AppCompatActivity() {
         init()
         donateButton.setOnClickListener(myButtonClickListener)
         ticTacToeButton.setOnClickListener(ticTacToeListener)
+        soundPadButton.setOnClickListener(soundPadListener)
         checkaDate()
+    }
+
+    var soundPadListener: View.OnClickListener = View.OnClickListener {
+        soundPadShow()
     }
 
     var ticTacToeListener: View.OnClickListener = View.OnClickListener {
@@ -50,7 +56,11 @@ class MainActivity : AppCompatActivity() {
     fun ticTacToeShow(){
         val i = Intent(this, TicTacToeActivity::class.java)
         startActivity(i)
+    }
 
+    fun soundPadShow(){
+        val i = Intent(this, SoundPadActivity::class.java)
+        startActivity(i)
     }
 
     fun init(){
@@ -59,7 +69,8 @@ class MainActivity : AppCompatActivity() {
         star2Image = findViewById(R.id.starView2)
         moonImage = findViewById(R.id.moonView)
         sunnImage = findViewById(R.id.sunnView)
-        ticTacToeButton = findViewById(R.id.ticTacToeButton)
+        ticTacToeButton = findViewById(R.id.tictactoeButton)
+        soundPadButton = findViewById(R.id.soundpadButton)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

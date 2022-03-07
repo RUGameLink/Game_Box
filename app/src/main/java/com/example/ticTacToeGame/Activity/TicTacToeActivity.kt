@@ -1,8 +1,6 @@
-package com.example.ticTacToeGame
+package com.example.ticTacToeGame.Activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -13,6 +11,7 @@ import android.media.MediaPlayer
 import android.os.Build
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import com.example.ticTacToeGame.Games.TicTacToe
 
 
 class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
@@ -40,6 +39,8 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
     var gameActive = true
 
+    lateinit var ticTacToe: TicTacToe
+
     lateinit var filledPosition: IntArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         restartButton.setOnClickListener(restartGameListener)
         backButton.setOnClickListener(backListener)
         filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1) //Массив отслеживания активированных кнопок
+
         initListener()
     }
 
