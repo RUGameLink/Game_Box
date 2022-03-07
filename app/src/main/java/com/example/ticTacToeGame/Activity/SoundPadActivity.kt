@@ -17,7 +17,7 @@ class SoundPadActivity : AppCompatActivity() {
     lateinit var backButton: Button
 
     lateinit var soundPool: SoundPool
-    /*lateinit var sound1: Int
+    lateinit var sound1: Int
     lateinit var sound2: Int
     lateinit var sound3: Int
     lateinit var sound4: Int
@@ -108,5 +108,5 @@ class SoundPadActivity : AppCompatActivity() {
         backButton = findViewById(R.id.backButton)
         bonfireButton = findViewById(R.id.bonfireButton)
         rainButton = findViewById(R.id.rainButton)
-    }*/
+    }
 }
