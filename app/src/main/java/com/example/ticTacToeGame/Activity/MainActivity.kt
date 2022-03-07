@@ -14,14 +14,15 @@ import com.example.storybook.R
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var donateButton: Button
-    lateinit var ticTacToeButton: Button
-    lateinit var soundPadButton: Button
+    private lateinit var donateButton: Button
+    private lateinit var ticTacToeButton: Button
+    private lateinit var soundPadButton: Button
+    private lateinit var guessTheNumberButton: Button
 
-    lateinit var star1Image: ImageView
-    lateinit var star2Image: ImageView
-    lateinit var moonImage: ImageView
-    lateinit var sunnImage: ImageView
+    private lateinit var star1Image: ImageView
+    private lateinit var star2Image: ImageView
+    private lateinit var moonImage: ImageView
+    private lateinit var sunnImage: ImageView
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,39 +32,49 @@ class MainActivity : AppCompatActivity() {
         donateButton.setOnClickListener(myButtonClickListener)
         ticTacToeButton.setOnClickListener(ticTacToeListener)
         soundPadButton.setOnClickListener(soundPadListener)
+        guessTheNumberButton.setOnClickListener(guessTheNumberListener)
         checkaDate()
     }
 
-    var soundPadListener: View.OnClickListener = View.OnClickListener {
+    private var soundPadListener: View.OnClickListener = View.OnClickListener {
         soundPadShow()
     }
 
-    var ticTacToeListener: View.OnClickListener = View.OnClickListener {
+    private var ticTacToeListener: View.OnClickListener = View.OnClickListener {
         ticTacToeShow()
     }
 
-    var myButtonClickListener: View.OnClickListener = View.OnClickListener {
+    private var myButtonClickListener: View.OnClickListener = View.OnClickListener {
         donating()
     }
 
-    fun donating(){
+    private var guessTheNumberListener: View.OnClickListener = View.OnClickListener {
+        guessTheNumberShow()
+    }
+
+    private fun donating(){
         val url = "https://boosty.to/sadsm"
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(url)
         startActivity(i)
     }
 
-    fun ticTacToeShow(){
+    private fun guessTheNumberShow(){
+        val i = Intent(this, GuessTheNumberActivity::class.java)
+        startActivity(i)
+    }
+
+    private fun ticTacToeShow(){
         val i = Intent(this, TicTacToeActivity::class.java)
         startActivity(i)
     }
 
-    fun soundPadShow(){
+    private fun soundPadShow(){
         val i = Intent(this, SoundPadActivity::class.java)
         startActivity(i)
     }
 
-    fun init(){
+    private fun init(){
         donateButton = findViewById(R.id.backButton)
         star1Image = findViewById(R.id.starView1)
         star2Image = findViewById(R.id.starView2)
@@ -71,10 +82,11 @@ class MainActivity : AppCompatActivity() {
         sunnImage = findViewById(R.id.sunnView)
         ticTacToeButton = findViewById(R.id.tictactoeButton)
         soundPadButton = findViewById(R.id.soundpadButton)
+        guessTheNumberButton = findViewById(R.id.guessTheNumberButton)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun checkaDate(){
+    private fun checkaDate(){
         val date: String =
             SimpleDateFormat("HH").format(Calendar.getInstance().time)
 

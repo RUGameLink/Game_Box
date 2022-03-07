@@ -16,4 +16,6 @@
     <color name="lime_green">#32CD32</color>
     <color name="mainly_green">#20B2AA</color>
     <color name="mainly_blue">#468499</color>
+    <color name="lyght_green">#99CC00</color>
+    <color name="lyghter_green">#99FF33</color>
 </resources>

@@ -11,4 +11,8 @@
     <string name="drawGame">Ничья</string>
     <string name="back">Назад</string>
     <string name="soundPad">SoundPad</string>
+    <string name="less">Меньше</string>
+    <string name="more">Больше</string>
+    <string name="equal">Равно</string>
+    <string name="guessTheGame">Угадай число</string>
 </resources>
