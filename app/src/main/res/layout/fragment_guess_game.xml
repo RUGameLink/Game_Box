@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ticTacToeGame.Fragment.guessGameFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="310dp"
+            android:layout_height="47dp"
+            android:backgroundTint="@color/orange2"
+            android:text="@string/back"
+            app:cornerRadius="15px"
+            app:icon="@drawable/back"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.94"
+            app:rippleColor="@color/orange1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/guessPhNumberButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="162dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/lyght_green"
+            android:text="@string/guess_phone_number"
+            app:cornerRadius="15px"
+            app:icon="@drawable/numbers"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.928"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.457"
+            app:rippleColor="@color/lyghter_green" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/guessMyNumberButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="162dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/lyght_green"
+            android:text="@string/guess_my_number"
+            app:cornerRadius="15px"
+            app:icon="@drawable/numbers"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.068"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.457"
+            app:rippleColor="@color/lyghter_green" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="261dp"
+            android:layout_height="249dp"
+            android:src="@drawable/question"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.817" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

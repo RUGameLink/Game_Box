@@ -35,11 +35,11 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
 
 
-    var gameActive = true
+
 
     lateinit var ticTacToe: TicTacToe
 
-    lateinit var filledPosition: IntArray
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,6 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         init()
         restartButton.setOnClickListener(restartGameListener)
         backButton.setOnClickListener(backListener)
-    //    filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1) //Массив отслеживания активированных кнопок
         ticTacToe = TicTacToe()
 
         initListener()
