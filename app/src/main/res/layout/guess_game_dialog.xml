@@ -5,75 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/minNumText"
+    <LinearLayout
+        android:id="@+id/dialogLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/min_count"
-        android:inputType="number"
-        android:minHeight="48dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.547" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/maxNumText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/max_count"
-        android:inputType="number"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="157dp"
+            app:srcCompat="@drawable/number_blocks" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="178dp"
-        android:layout_height="156dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.311"
-        app:srcCompat="@drawable/number_blocks" />
+        <TextView
+            android:gravity="center"
+            android:id="@+id/textView2"
+            android:layout_width="270dp"
+            android:layout_height="31dp"
+            android:text="@string/game_rules" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="223dp"
-        android:layout_height="31dp"
-        android:text="@string/game_rules"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478" />
+        <EditText
+            android:id="@+id/minNumText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="6"
+            android:gravity="center"
+            android:hint="@string/min_count"
+            android:inputType="number"
+            android:minHeight="48dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/backButton"
-        style="@style/Widget.MaterialComponents.Button.Icon"
-        android:layout_width="310dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/orange2"
-        android:text="@string/start_game"
-        app:cornerRadius="15px"
-        app:icon="@drawable/start_game"
-        app:iconSize="64px"
-        app:iconTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.715"
-        app:rippleColor="@color/orange1" />
+        <EditText
+            android:gravity="center"
+            android:maxLength="6"
+            android:id="@+id/maxNumText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/max_count"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/orange2"
+            android:text="@string/start_game"
+            app:cornerRadius="15px"
+            app:icon="@drawable/start_game"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:rippleColor="@color/orange1" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

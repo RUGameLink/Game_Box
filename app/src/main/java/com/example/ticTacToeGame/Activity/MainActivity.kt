@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         guessTheNumberButton.setOnClickListener(guessTheNumberListener)*/
         checkaDate()
         //guessTheNumberShow()
-        menuFatgmentShow()
+        menuFragmentShow()
 
     }
 
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(i)
     }*/
 
-    private fun menuFatgmentShow(){
+    private fun menuFragmentShow(){
     //    val i = Intent(this, GuessTheNumberActivity::class.java)
     //    startActivity(i)
         menuFragment = MenuFragment()
@@ -104,17 +104,18 @@ class MainActivity : AppCompatActivity() {
 
         when(date){
             "21", "22", "23", "00", "01", "02", "03", "04", "05", "06", "07"
-            -> {star1Image.setVisibility(View.VISIBLE)
-                star2Image.setVisibility(View.VISIBLE)
-                moonImage.setVisibility(View.VISIBLE)
-                sunnImage.setVisibility(View.INVISIBLE)
+            -> {
+                star1Image.visibility = View.VISIBLE
+                star2Image.visibility = View.VISIBLE
+                moonImage.visibility = View.VISIBLE
+                sunnImage.visibility = View.INVISIBLE
             }
             "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
             -> {
-                star1Image.setVisibility(View.INVISIBLE)
-                star2Image.setVisibility(View.INVISIBLE)
-                moonImage.setVisibility(View.INVISIBLE)
-                sunnImage.setVisibility(View.VISIBLE)
+                star1Image.visibility = View.INVISIBLE
+                star2Image.visibility = View.INVISIBLE
+                moonImage.visibility = View.INVISIBLE
+                sunnImage.visibility = View.VISIBLE
             }
         }
     }
