@@ -19,6 +19,9 @@
             android:name="com.example.ticTacToeGame.Activity.GuessTheNumberActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.ticTacToeGame.Activity.GuessThePhoneNumberActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.ticTacToeGame.Activity.SoundPadActivity"
             android:exported="false" />
         <activity

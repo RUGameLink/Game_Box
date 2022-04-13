@@ -1,0 +1,88 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ticTacToeGame.Fragment.MenuFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/guessMyNumberButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="305dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/lyght_green"
+            android:text="@string/guessTheGame"
+            app:cornerRadius="15px"
+            app:icon="@drawable/numbers"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.433"
+            app:rippleColor="@color/lyghter_green" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/db"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange2"
+            android:text="@string/donate"
+            app:cornerRadius="15px"
+            app:icon="@drawable/donation"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.82"
+            app:rippleColor="@color/orange1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tictactoeButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="305dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/turquoise_green"
+            android:text="@string/tic_tac_toe"
+            app:cornerRadius="15px"
+            app:icon="@drawable/tictactoe"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.692"
+            app:rippleColor="@color/deep_green" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/soundpadButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="305dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/mainly_blue"
+            android:text="@string/soundPad"
+            app:cornerRadius="15px"
+            app:icon="@drawable/sound"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.56"
+            app:rippleColor="@color/mainly_green" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
