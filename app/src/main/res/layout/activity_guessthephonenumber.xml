@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/nightfall"
+    tools:context="com.example.ticTacToeGame.Activity.GuessThePhoneNumberActivity">
+
+    <TextView
+        android:id="@+id/resText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_num"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.072" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="391dp"
+        android:layout_height="262dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.413"
+        app:srcCompat="@drawable/square" />
+
+    <EditText
+        android:id="@+id/getNumText"
+        android:layout_width="217dp"
+        android:layout_height="72dp"
+        android:ems="10"
+        android:maxLength="6"
+        android:gravity="center"
+        android:hint="@string/num_hint"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.451" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/equalButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="295dp"
+        android:layout_height="47dp"
+        android:backgroundTint="@color/lyght_green"
+        android:text="@string/num_answer"
+        app:cornerRadius="15px"
+        app:icon="@drawable/answer"
+        app:iconSize="64px"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.769"
+        app:rippleColor="@color/lyghter_green" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="310dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/orange1"
+        android:text="@string/back"
+        app:cornerRadius="15px"
+        app:icon="@drawable/back"
+        app:iconSize="64px"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94"
+        app:rippleColor="@color/orange1" />
+
+    <ImageButton
+        android:id="@+id/askButton"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/nightfall"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16"
+        app:srcCompat="@drawable/ask" />
+</androidx.constraintlayout.widget.ConstraintLayout>

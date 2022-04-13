@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storybook.R
-import com.example.ticTacToeGame.Games.GuessTheGame
+import com.example.ticTacToe.Games.GuessTheGame
 import kotlin.properties.Delegates
 
 class GuessTheNumberActivity: AppCompatActivity() {
@@ -70,7 +70,7 @@ class GuessTheNumberActivity: AppCompatActivity() {
         var partOne = getString(R.string.end_guess1)
         var partTwo = getString(R.string.end_guess2)
         if (res){
-            numText.setText(partOne + "\n" + " ${guessTheGame.getMidCount()}" +  partTwo  + " ${guessTheGame.getMidCount() + 1}") //+ guessTheGame.getMidCount() +R.string.end_guess2.toString()  + "${guessTheGame.getMidCount() + 1}"
+            numText.setText(partOne + "\n" + " ${guessTheGame.getMidCount()} " +  partTwo  + " ${guessTheGame.getMidCount() + 1}") //+ guessTheGame.getMidCount() +R.string.end_guess2.toString()  + "${guessTheGame.getMidCount() + 1}"
             endGame()
         }
 

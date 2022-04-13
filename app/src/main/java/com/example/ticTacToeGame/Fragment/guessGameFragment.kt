@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.storybook.R
 import com.example.ticTacToeGame.Activity.GuessTheNumberActivity
+import com.example.ticTacToeGame.Activity.GuessThePhoneNumberActivity
 
 
 class guessGameFragment : Fragment() {
@@ -88,7 +89,32 @@ class guessGameFragment : Fragment() {
         builder.setView(dialoglayout)
         val dialog = builder.create()
         dialog.show()
-        dialog.window?.setBackgroundDrawableResource(R.color.nightfall)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.background2)
+
+        val dialogBtn = dialoglayout.findViewById<Button>(R.id.backButton)
+        val dialogMinTextView = dialoglayout.findViewById<EditText>(R.id.minNumText)
+        val dialogMaxTextView = dialoglayout.findViewById<EditText>(R.id.maxNumText)
+
+        dialogBtn.setOnClickListener{
+            if(dialogMinTextView.text.isEmpty() || dialogMaxTextView.text.isEmpty()){
+                Toast.makeText(activity, "Заполните поля для старта!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                var minCount = dialogMinTextView.text.toString()
+                var maxCount = dialogMaxTextView.text.toString()
+                if(maxCount.toInt() <= minCount.toInt()){
+                    Toast.makeText(activity, "Числа должны быть неодинаковыми, минимальное значение меньше максимального!", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(activity, "Все готово, начинаем", Toast.LENGTH_SHORT).show()
+
+                    val i = Intent(activity, GuessThePhoneNumberActivity::class.java)
+                    i.putExtra("minCount", minCount)
+                    i.putExtra("maxCount", maxCount)
+                    startActivity(i)
+                }
+            }
+        }
 
     }
 

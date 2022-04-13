@@ -3,10 +3,10 @@
     <string name="loading">Loading...</string>
     <string name="donate">Пожертвовать на развитие</string>
     <string name="tic_tac_toe">Крестики-нолики</string>
-    <string name="turnOne">Ходит первый игрок</string>
-    <string name="turnTwo">Ходит второй игрок</string>
-    <string name="playerOneWin">Первый игрок выиграл</string>
-    <string name="playerTwoWin">Второй игрок выиграл</string>
+    <string name="turnOne">Ходит Крестик</string>
+    <string name="turnTwo">Ходит Нолик</string>
+    <string name="playerOneWin">Крестик выиграл</string>
+    <string name="playerTwoWin">Нолик выиграл</string>
     <string name="restartButton">Перезапуск</string>
     <string name="drawGame">Ничья</string>
     <string name="back">Назад</string>
@@ -19,6 +19,16 @@
     <string name="guess_my_number">Загадать свое число</string>
     <string name="guess_phone_number">Угадать число телефона</string>
     <string name="your_num">Ваше число: </string>
+    <string name="less_num">Мое число меньше</string>
+    <string name="big_num">Мое число больше</string>
+    <string name="go_num">Какое число я загадал?</string>
+    <string name="num_hint">Введите число</string>
+    <string name="num_answer">Попробовать угадать</string>
+    <string name="ask_text">Вы загадали число в пределах:</string>
+
+    <string name="num_is_big">Мое число больше!</string>
+    <string name="num_is_small">Мое число меньше!</string>
+    <string name="num_is_true">Вы угадали!</string>
 
     <string name="end_guess1">Я устал! Ваше число</string>
     <string name="end_guess2">или</string>
