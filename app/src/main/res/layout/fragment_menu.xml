@@ -10,6 +10,25 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/timerGameButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="305dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/wisteria"
+            android:text="@string/timer_button"
+            app:cornerRadius="15px"
+            app:icon="@drawable/timer"
+            app:iconSize="64px"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.471"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.306"
+            app:rippleColor="@color/wild_orchid" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/guessMyNumberButton"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="305dp"
