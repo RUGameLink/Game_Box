@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.289" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/startStopButton"
         android:layout_width="187dp"
         android:layout_height="192dp"
         android:backgroundTint="@color/nightfall"
