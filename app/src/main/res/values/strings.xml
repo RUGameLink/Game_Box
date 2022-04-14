@@ -3,7 +3,7 @@
     <string name="loading">Loading...</string>
     <string name="donate">Пожертвовать на развитие</string>
     <string name="tic_tac_toe">Крестики-нолики</string>
-    <string name="timer_button">Останови таймер</string>
+    <string name="timer_button">Останови время</string>
     <string name="turnOne">Ходит Крестик</string>
     <string name="turnTwo">Ходит Нолик</string>
     <string name="playerOneWin">Крестик выиграл</string>
