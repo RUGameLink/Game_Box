@@ -1,4 +1,4 @@
-package com.example.ticTacToeGame.Games
+package com.example.ticTacToeGame.Services
 
 import android.app.Service
 import android.content.Intent
@@ -15,7 +15,7 @@ class TimerService: Service() {
         timer.scheduleAtFixedRate(
             TimeTask(time),
             0,
-            100
+            10
         )
         return START_NOT_STICKY
     }

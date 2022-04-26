@@ -29,7 +29,8 @@
             android:exported="false" />
         <activity
             android:name="com.example.ticTacToeGame.Activity.LoadingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="com.example.ticTacToeGame.Games.TimerService"></service>
+        <service android:name="com.example.ticTacToeGame.Services.TimerService"></service>
     </application>
 
 </manifest>

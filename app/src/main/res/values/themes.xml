@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.StoryBook" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/nightfall</item>
         <item name="colorPrimaryVariant">@color/nightfall</item>
@@ -14,7 +15,6 @@
         <item name="android:windowAnimationStyle">@style/animation</item>
         <!-- Customize your theme here. -->
     </style>
-
     <style name="animation">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
