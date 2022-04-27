@@ -1,16 +1,16 @@
 package com.example.ticTacToeGame.Activity
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import com.example.storybook.R
-
 import android.media.MediaPlayer
 import android.os.Build
+import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.example.storybook.R
 import com.example.ticTacToeGame.Games.TicTacToe
 
 
@@ -228,5 +228,20 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         b6.setOnClickListener(this)
         b7.setOnClickListener(this)
         b8.setOnClickListener(this)
+    }
+
+//    override fun onBackPressed() {
+//        if (shouldAllowBack()) {
+//            super.onBackPressed()
+//        } else {
+//            doSomething()
+//        }
+//    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
+            true
+        } else super.onKeyDown(keyCode, event)
     }
 }

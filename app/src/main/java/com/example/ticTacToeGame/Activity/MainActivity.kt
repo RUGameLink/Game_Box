@@ -3,6 +3,7 @@ package com.example.ticTacToeGame.Activity
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -41,6 +42,13 @@ class MainActivity : AppCompatActivity() {
         menuFragmentShow()
 
         hideBars()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
+            true
+        } else super.onKeyDown(keyCode, event)
     }
 
     private fun hideBars() {
