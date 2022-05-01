@@ -9,6 +9,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ticTacToe.Games.GuessTheGame
 import com.example.storybook.R
+import com.example.ticTacToeGame.Games.Presets
+import io.github.muddz.styleabletoast.StyleableToast
+import nl.dionsegijn.konfetti.xml.KonfettiView
 import kotlin.properties.Delegates
 
 class GuessThePhoneNumberActivity : AppCompatActivity() {
@@ -21,6 +24,7 @@ class GuessThePhoneNumberActivity : AppCompatActivity() {
     private lateinit var askButton: ImageButton
     private lateinit var getNumText: EditText
     private lateinit var resText: TextView
+    lateinit var viewKonfetti: KonfettiView
 
     private lateinit var guessTheGame: GuessTheGame
 
@@ -69,13 +73,13 @@ class GuessThePhoneNumberActivity : AppCompatActivity() {
     }
 
     private var askListener: View.OnClickListener = View.OnClickListener {
-        var toastText = "${getText(R.string.ask_text)} ${minCount} - ${maxCount}"
-        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
+        var toastText = "${getText(R.string.ask_text)} \n${minCount} - ${maxCount}"
+        StyleableToast.makeText(this, toastText, Toast.LENGTH_SHORT, R.style.positive_toast).show()
     }
 
     private var equalListener: View.OnClickListener = View.OnClickListener {
         if(getNumText.text.isEmpty()){
-            Toast.makeText(this, "Введите число!", Toast.LENGTH_SHORT).show()
+            StyleableToast.makeText(this, "Введите число!", Toast.LENGTH_SHORT, R.style.negative_toast).show()
             return@OnClickListener
         }
         else{
@@ -91,6 +95,7 @@ class GuessThePhoneNumberActivity : AppCompatActivity() {
             1 -> resText.setText(R.string.num_is_big)
             2 -> resText.setText(R.string.num_is_small)
             0 -> {
+                viewKonfetti.start(Presets.rain())
                 resText.setText(R.string.num_is_true)
                 endGame()
             }
@@ -98,7 +103,7 @@ class GuessThePhoneNumberActivity : AppCompatActivity() {
     }
 
     private fun endGame(){
-        Toast.makeText(applicationContext, R.string.end_guess_game, Toast.LENGTH_LONG).show()
+        StyleableToast.makeText(applicationContext, getText(R.string.end_guess_game).toString(), Toast.LENGTH_SHORT, R.style.positive_toast).show()
 
         val handler = Handler()
         handler.postDelayed({
@@ -120,5 +125,6 @@ class GuessThePhoneNumberActivity : AppCompatActivity() {
         getNumText = findViewById(R.id.getNumText)
         resText = findViewById(R.id.resText)
         askButton = findViewById(R.id.askButton)
+        viewKonfetti = findViewById(R.id.konfettiView)
     }
 }

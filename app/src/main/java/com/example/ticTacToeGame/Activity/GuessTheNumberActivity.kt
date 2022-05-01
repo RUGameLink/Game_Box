@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storybook.R
 import com.example.ticTacToe.Games.GuessTheGame
+import com.example.ticTacToeGame.Games.Presets
+import io.github.muddz.styleabletoast.StyleableToast
+import nl.dionsegijn.konfetti.xml.KonfettiView
 import kotlin.properties.Delegates
 
 class GuessTheNumberActivity: AppCompatActivity() {
@@ -20,6 +23,7 @@ class GuessTheNumberActivity: AppCompatActivity() {
     private lateinit var backButton: Button
     private lateinit var numText: TextView
     private lateinit var gameText: TextView
+    lateinit var viewKonfetti: KonfettiView
 
     private lateinit var guessTheGame: GuessTheGame
 
@@ -78,6 +82,7 @@ class GuessTheNumberActivity: AppCompatActivity() {
     }
 
     private var equalButtonListener: View.OnClickListener = View.OnClickListener {
+        viewKonfetti.start(Presets.rain())
         endGame()
     }
 
@@ -99,7 +104,7 @@ class GuessTheNumberActivity: AppCompatActivity() {
     }
 
     private fun endGame(){
-        Toast.makeText(applicationContext, R.string.end_guess_game, Toast.LENGTH_LONG).show()
+        StyleableToast.makeText(applicationContext, getText(R.string.end_guess_game).toString(), Toast.LENGTH_SHORT, R.style.positive_toast).show()
 
         val handler = Handler()
         handler.postDelayed({
@@ -121,5 +126,6 @@ class GuessTheNumberActivity: AppCompatActivity() {
         equalButton = findViewById(R.id.equalButton)
         backButton = findViewById(R.id.backButton)
         numText = findViewById(R.id.numText)
+        viewKonfetti = findViewById(R.id.konfettiView)
     }
 }

@@ -39,9 +39,10 @@
     <string name="max_count">Максимальное значение</string>
     <string name="start_game">Начинаем!</string>
 
-    <string name="negative_counts">Максимальное значение должно быть больше минимального!</string>
+    <string name="negative_counts">Числа должны быть неодинаковыми, минимальное значение меньше максимального!</string>
     <string name="bad_start_guess">Заполните поля для старта!</string>
     <string name="start_guess_game">Все готово! Начинаем!</string>
+    <string name="enter_the_number">Введите число!</string>
 
     <string name="win">Я выиграл! Ваше число: </string>
     <string name="end_guess_game">Победа! Возвращаемся назад...</string>

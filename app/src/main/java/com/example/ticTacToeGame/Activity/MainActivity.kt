@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                     builder.setView(dialoglayout)
                     val dialog = builder.create()
                     dialog.show()
-                    dialog.window?.setBackgroundDrawableResource(R.drawable.background2)
+                    dialog.window?.setBackgroundDrawableResource(R.drawable.background3)
 
                     val dialogBtn = dialoglayout.findViewById<Button>(R.id.posSelectLangButton)
                     val dialogRusButton = dialoglayout.findViewById<RadioButton>(R.id.rusLangButton)
