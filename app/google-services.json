@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "534027115542",
+    "project_id": "gameboxapp-42309",
+    "storage_bucket": "gameboxapp-42309.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534027115542:android:e796196827b539ea45a937",
+        "android_client_info": {
+          "package_name": "com.example.storybook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534027115542-ger2k0ns6mkghjegr99o4kje54o5d6sh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.storybook",
+            "certificate_hash": "d8ac86e36382942715493f7ee66501908836993b"
+          }
+        },
+        {
+          "client_id": "534027115542-lnc1ghp9oug39r5l58hjbqi83mrdkple.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLpP0l0FnHXdH33JajH2Si3Td_w1MSOK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534027115542-lnc1ghp9oug39r5l58hjbqi83mrdkple.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

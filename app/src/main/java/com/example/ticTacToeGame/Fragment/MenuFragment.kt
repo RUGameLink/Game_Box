@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.FragmentTransaction
 import com.example.storybook.R
-import com.example.ticTacToeGame.Activity.MainActivity
 import com.example.ticTacToeGame.Activity.SoundPadActivity
 import com.example.ticTacToeGame.Activity.TicTacToeActivity
 import com.example.ticTacToeGame.Activity.TimerActivity
@@ -98,7 +97,7 @@ class MenuFragment : Fragment() {
     private fun init(view: View){
         donateButton = view.findViewById(R.id.db)
         ticTacToeButton = view.findViewById(R.id.tictactoeButton)!!
-        soundPadButton = view.findViewById(R.id.soundpadButton)
+        soundPadButton = view.findViewById(R.id.languageButton)
         guessTheNumberButton = view.findViewById(R.id.guessMyNumberButton)
         timerButton = view.findViewById(R.id.timerGameButton)
     }

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.storybook.R
 import com.example.ticTacToeGame.Activity.GuessTheNumberActivity
 import com.example.ticTacToeGame.Activity.GuessThePhoneNumberActivity
+import io.github.muddz.styleabletoast.StyleableToast
 
 
 class guessGameFragment : Fragment() {
@@ -62,16 +63,18 @@ class guessGameFragment : Fragment() {
 
         dialogBtn.setOnClickListener{
             if(dialogMinTextView.text.isEmpty() || dialogMaxTextView.text.isEmpty()){
-                Toast.makeText(activity, "Заполните поля для старта!", Toast.LENGTH_SHORT).show()
+                activity?.let { it1 -> StyleableToast.makeText(it1, getText(R.string.bad_start_guess).toString(), Toast.LENGTH_SHORT, R.style.negative_toast).show() }
             }
             else {
                 var minCount = dialogMinTextView.text.toString()
                 var maxCount = dialogMaxTextView.text.toString()
                 if(maxCount.toInt() <= minCount.toInt()){
-                    Toast.makeText(activity, "Числа должны быть неодинаковыми, минимальное значение меньше максимального!", Toast.LENGTH_SHORT).show()
+                    activity?.let { it1 -> StyleableToast.makeText(it1, getText(R.string.negative_counts).toString(), Toast.LENGTH_SHORT, R.style.negative_toast).show() }
                 }
                 else{
-                    Toast.makeText(activity, "Все готово, начинаем", Toast.LENGTH_SHORT).show()
+                //    Toast.makeText(activity, "Все готово, начинаем", Toast.LENGTH_SHORT).show()
+                    activity?.let { it1 -> StyleableToast.makeText(it1,
+                        getText(R.string.start_guess_game).toString(), Toast.LENGTH_SHORT, R.style.positive_toast).show() }
 
                     val i = Intent(activity, GuessTheNumberActivity::class.java)
                     i.putExtra("minCount", minCount)

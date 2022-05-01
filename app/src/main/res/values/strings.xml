@@ -39,6 +39,10 @@
     <string name="max_count">Максимальное значение</string>
     <string name="start_game">Начинаем!</string>
 
+    <string name="negative_counts">Максимальное значение должно быть больше минимального!</string>
+    <string name="bad_start_guess">Заполните поля для старта!</string>
+    <string name="start_guess_game">Все готово! Начинаем!</string>
+
     <string name="win">Я выиграл! Ваше число: </string>
     <string name="end_guess_game">Победа! Возвращаемся назад...</string>
 
@@ -47,4 +51,19 @@
     <string name="timer_text">00:00:00</string>
     <string name="mission_text">Вам нужно остановить таймер на:</string>
     <string name="timer_ask_text">Нажмите на картинку, чтобы запустить / останосить таймер</string>
+
+    <string name="user_auth">Вы успешно авторизировались</string>
+    <string name="user_no_auth">Авторизируйтесь, чтобы увидеть ваш прогресс и сохранить его</string>
+    <string name="auth">Войти с помощью</string>
+    <string name="google_auth">Google-аккаунт</string>
+
+
+    <string name="history">История</string>
+    <string name="languages">Изменить язык</string>
+    <string name="logout">Выйти из аккаунта</string>
+
+    <string name="select_language">Выберите язык приложения</string>
+    <string name="rus_language">Русский язык</string>
+    <string name="usa_language">Английский язык</string>
+    <string name="select_language_ok">Выбрать язык</string>
 </resources>

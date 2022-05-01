@@ -11,7 +11,13 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storybook.R
+import com.example.ticTacToeGame.Games.Presets
 import com.example.ticTacToeGame.Games.TicTacToe
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.emitter.Emitter
+import nl.dionsegijn.konfetti.xml.KonfettiView
+import java.util.concurrent.TimeUnit
 
 
 class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
@@ -27,6 +33,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var restartButton: Button
     lateinit var backButton: Button
+    lateinit var viewKonfetti: KonfettiView
 
     lateinit var turnView: TextView
 
@@ -76,6 +83,7 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         b7 = findViewById(R.id.b7)
         b8 = findViewById(R.id.b8)
 
+        viewKonfetti = findViewById(R.id.konfettiView)
         restartButton = findViewById(R.id.restartButton)
         backButton = findViewById(R.id.backButton)
 
@@ -136,9 +144,12 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         var result = ticTacToe.checkForWins()
 
         when(result){
-            1 -> turnView.setText(R.string.playerOneWin)
-            2 -> turnView.setText(R.string.playerTwoWin)
-            0 -> turnView.setText(R.string.drawGame)
+            1 -> {viewKonfetti.start(Presets.parade())
+                turnView.setText(R.string.playerOneWin)}
+            2 -> {viewKonfetti.start(Presets.parade())
+                turnView.setText(R.string.playerTwoWin)}
+            0 -> {viewKonfetti.start(Presets.rain())
+                turnView.setText(R.string.drawGame)}
         }
     }
 

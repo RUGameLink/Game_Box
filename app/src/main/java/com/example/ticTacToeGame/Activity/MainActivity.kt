@@ -1,52 +1,134 @@
 package com.example.ticTacToeGame.Activity
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.res.Resources
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
+import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat.getColor
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
 import com.example.storybook.R
 import com.example.ticTacToeGame.Fragment.MenuFragment
+import com.google.android.material.color.MaterialColors.getColor
+import com.google.android.material.navigation.NavigationView
 import java.util.*
+import kotlin.properties.Delegates
+
 
 class MainActivity : AppCompatActivity() {
- /*   private lateinit var donateButton: Button
-    private lateinit var ticTacToeButton: Button
-    private lateinit var soundPadButton: Button
-    private lateinit var guessTheNumberButton: Button*/
-
     private lateinit var star1Image: ImageView
     private lateinit var star2Image: ImageView
     private lateinit var moonImage: ImageView
     private lateinit var sunnImage: ImageView
+    private lateinit var menuButton: ImageButton
 
     private lateinit var menuFrame: FrameLayout
     private lateinit var menuFragment: MenuFragment
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var checkAuthCount: String
+    private var check by Delegates.notNull<Boolean>()
 
+    private lateinit var toggle: ActionBarDrawerToggle
+
+    @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         init()
-      /*  donateButton.setOnClickListener(myButtonClickListener)
-        ticTacToeButton.setOnClickListener(ticTacToeListener)
-        soundPadButton.setOnClickListener(soundPadListener)
-        guessTheNumberButton.setOnClickListener(guessTheNumberListener)*/
+        drawerLayout = findViewById(R.id.menu_draw)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+
+        check = checkAuthCount.toBoolean()
+        println("testBool ${check}")
+
+//        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+//        drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
+
+        if(check){
+
+            val header: View = LayoutInflater.from(this).inflate(R.layout.nav_header, null)
+            navView.addHeaderView(header)
+
+            navView.inflateMenu(R.menu.nav_menu)
+        }
+        else{
+            val header: View = LayoutInflater.from(this).inflate(R.layout.nav_header_no_login, null)
+            navView.addHeaderView(header)
+
+            navView.menu.clear();
+            navView.inflateMenu(R.menu.nav_menu_no_login);
+        }
+
+        navView.itemIconTintList = null
+
+
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.languages -> {
+                    val inflater = layoutInflater
+                    val builder = AlertDialog.Builder(navView.context)
+                    val dialoglayout: View = inflater.inflate(R.layout.language_selector_dialog, null)
+                    builder.setView(dialoglayout)
+                    val dialog = builder.create()
+                    dialog.show()
+                    dialog.window?.setBackgroundDrawableResource(R.drawable.background2)
+
+                    val dialogBtn = dialoglayout.findViewById<Button>(R.id.posSelectLangButton)
+                    val dialogRusButton = dialoglayout.findViewById<RadioButton>(R.id.rusLangButton)
+                    val dialogEngButton = dialoglayout.findViewById<RadioButton>(R.id.engLangButton)
+
+                    dialogRusButton.setOnClickListener {
+                        dialogEngButton.isChecked = false
+                    }
+                    dialogEngButton.setOnClickListener {
+                        dialogRusButton.isChecked = false
+                    }
+
+                    dialogBtn.setOnClickListener{
+                        if(dialogRusButton.isChecked){
+                            Toast.makeText(this, "Будет рус", Toast.LENGTH_SHORT).show()
+                        }
+                        if(dialogEngButton.isChecked){
+                            Toast.makeText(this, "Будет англ", Toast.LENGTH_SHORT).show()
+                        }
+                        dialog.dismiss()
+                    }
+                }
+                R.id.history -> Toast.makeText(applicationContext, "История", Toast.LENGTH_SHORT).show()
+                R.id.logout -> Toast.makeText(applicationContext, "Выход", Toast.LENGTH_SHORT).show()
+                R.id.auth -> Toast.makeText(applicationContext, "Вход", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+
+
         checkaDate()
-        //guessTheNumberShow()
         menuFragmentShow()
 
         hideBars()
+
+        menuButton.setOnClickListener(menuListener)
+    }
+
+    var menuListener: View.OnClickListener = View.OnClickListener{
+        drawerLayout.openDrawer(GravityCompat.START)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         return if (keyCode == KeyEvent.KEYCODE_BACK) {
-            //preventing default implementation previous to android.os.Build.VERSION_CODES.ECLAIR
             true
         } else super.onKeyDown(keyCode, event)
     }
@@ -61,59 +143,24 @@ class MainActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
 
- /*   private var soundPadListener: View.OnClickListener = View.OnClickListener {
-        soundPadShow()
-    }
-
-    private var ticTacToeListener: View.OnClickListener = View.OnClickListener {
-        ticTacToeShow()
-    }
-
-    private var myButtonClickListener: View.OnClickListener = View.OnClickListener {
-        donating()
-    }
-
-    private var guessTheNumberListener: View.OnClickListener = View.OnClickListener {
-        guessTheNumberShow()
-    }
-
-    private fun donating(){
-        val url = "https://boosty.to/sadsm"
-        val i = Intent(Intent.ACTION_VIEW)
-        i.data = Uri.parse(url)
-        startActivity(i)
-    }*/
-
     private fun menuFragmentShow(){
-    //    val i = Intent(this, GuessTheNumberActivity::class.java)
-    //    startActivity(i)
+
         menuFragment = MenuFragment()
         var fragmentTransaction :FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(menuFrame.id, menuFragment)
         fragmentTransaction.commit()
     }
 
-  /*  private fun ticTacToeShow(){
-        val i = Intent(this, TicTacToeActivity::class.java)
-        startActivity(i)
-    }
-
-    private fun soundPadShow(){
-        val i = Intent(this, SoundPadActivity::class.java)
-        startActivity(i)
-    }*/
-
     private fun init(){
         star1Image = findViewById(R.id.starView1)
         star2Image = findViewById(R.id.starView2)
         moonImage = findViewById(R.id.moonView)
         sunnImage = findViewById(R.id.sunnView)
-    /*    donateButton = findViewById(R.id.backButton)
-
-        ticTacToeButton = findViewById(R.id.tictactoeButton)
-        soundPadButton = findViewById(R.id.soundpadButton2)
-        guessTheNumberButton = findViewById(R.id.guessMyNumberButton)*/
         menuFrame = findViewById(R.id.menuFrame)
+        menuButton = findViewById(R.id.menuButton)
+
+        checkAuthCount = intent.getStringExtra("authCount").toString()
+        println("authCheck $checkAuthCount")
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

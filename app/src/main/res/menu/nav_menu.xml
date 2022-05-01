@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/history"
+        android:title="@string/history"/>
+
+    <item
+        android:id="@+id/languages"
+        android:icon="@drawable/united_states"
+        android:title="@string/languages"/>
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/logout"
+        android:title="@string/logout"/>
+</menu>

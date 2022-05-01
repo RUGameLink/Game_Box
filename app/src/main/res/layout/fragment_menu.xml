@@ -90,7 +90,7 @@
             app:rippleColor="@color/deep_green" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/soundpadButton"
+            android:id="@+id/languageButton"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="305dp"
             android:layout_height="48dp"
