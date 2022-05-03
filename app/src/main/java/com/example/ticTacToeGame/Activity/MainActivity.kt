@@ -2,6 +2,7 @@ package com.example.ticTacToeGame.Activity
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.res.Resources
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -10,18 +11,33 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat.getColor
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
 import com.example.storybook.R
 import com.example.ticTacToeGame.Fragment.MenuFragment
+import com.google.android.gms.auth.account.WorkAccount.getClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.color.MaterialColors.getColor
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
+import kotlin.concurrent.thread
 import kotlin.properties.Delegates
 
 
@@ -40,6 +56,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var toggle: ActionBarDrawerToggle
 
+    lateinit var launcher: ActivityResultLauncher<Intent>
+    lateinit var auth: FirebaseAuth
+
     @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,30 +69,22 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.menu_draw)
         val navView: NavigationView = findViewById(R.id.nav_view)
 
-        check = checkAuthCount.toBoolean()
-        println("testBool ${check}")
 
-//        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
-//        drawerLayout.addDrawerListener(toggle)
-//        toggle.syncState()
-
-        if(check){
-
-            val header: View = LayoutInflater.from(this).inflate(R.layout.nav_header, null)
-            navView.addHeaderView(header)
-
-            navView.inflateMenu(R.menu.nav_menu)
+        auth = Firebase.auth
+        auth.currentUser
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+            try {
+                val account = task.getResult(ApiException:: class.java)
+                if(account != null){
+                    firebaseAuthWithGoogle(account.idToken!!, navView)
+                }
+            }
+            catch (ex: ApiException){
+                println("ApiException")
+            }
         }
-        else{
-            val header: View = LayoutInflater.from(this).inflate(R.layout.nav_header_no_login, null)
-            navView.addHeaderView(header)
-
-            navView.menu.clear();
-            navView.inflateMenu(R.menu.nav_menu_no_login);
-        }
-
-        navView.itemIconTintList = null
-
+        checkAuthState(navView)
 
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
@@ -108,8 +119,18 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 R.id.history -> Toast.makeText(applicationContext, "История", Toast.LENGTH_SHORT).show()
-                R.id.logout -> Toast.makeText(applicationContext, "Выход", Toast.LENGTH_SHORT).show()
-                R.id.auth -> Toast.makeText(applicationContext, "Вход", Toast.LENGTH_SHORT).show()
+                R.id.logout -> {
+                    drawerLayout.close()
+                    auth.signOut()
+                    check = false
+                    showNavigationView(navView)
+                    drawerLayout.open()
+                }
+                R.id.auth -> {
+                    drawerLayout.close()
+                    singInWithGoogle()
+                    drawerLayout.open()
+                }
             }
             true
         }
@@ -121,6 +142,36 @@ class MainActivity : AppCompatActivity() {
         hideBars()
 
         menuButton.setOnClickListener(menuListener)
+    }
+
+    private fun showNavigationView(navView: NavigationView){
+        if(check){
+            if(navView.getHeaderView(0) != null)
+                navView.removeHeaderView(navView.getHeaderView(0))
+            var header: View = LayoutInflater.from(this).inflate(R.layout.nav_header, null)
+            navView.addHeaderView(header)
+            var userName = navView.getHeaderView(0).findViewById<TextView>(R.id.user_name)
+            userName.text = ""
+            var userImageView = navView.getHeaderView(0).findViewById<CircleImageView>(R.id.userImage)
+            Picasso.get().load(auth.currentUser?.photoUrl).into(userImageView)
+            userName.text = auth.currentUser?.displayName
+
+
+
+            navView.menu.clear();
+            navView.inflateMenu(R.menu.nav_menu)
+        }
+        else{
+            if(navView.getHeaderView(0) != null)
+                navView.removeHeaderView(navView.getHeaderView(0))
+            val header: View = LayoutInflater.from(this).inflate(R.layout.nav_header_no_login, null)
+            navView.addHeaderView(header)
+
+            navView.menu.clear();
+            navView.inflateMenu(R.menu.nav_menu_no_login);
+        }
+
+        navView.itemIconTintList = null
     }
 
     var menuListener: View.OnClickListener = View.OnClickListener{
@@ -159,8 +210,6 @@ class MainActivity : AppCompatActivity() {
         menuFrame = findViewById(R.id.menuFrame)
         menuButton = findViewById(R.id.menuButton)
 
-        checkAuthCount = intent.getStringExtra("authCount").toString()
-        println("authCheck $checkAuthCount")
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -185,4 +234,48 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun getClient(): GoogleSignInClient{
+        val gso = GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        return GoogleSignIn.getClient(this, gso)
+    }
+
+    private fun singInWithGoogle(){
+        val signInClient = getClient()
+        launcher.launch(signInClient.signInIntent)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String, navView: NavigationView){
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if(it.isSuccessful){
+                checkAuthState(navView)
+            }
+            else{
+                check = false
+                showNavigationView(navView)
+            }
+        }
+    }
+
+    private fun checkAuthState(navView: NavigationView){
+        if(auth.currentUser != null){
+            check = true
+            showNavigationView(navView)
+        }
+        else{
+            check = false
+            showNavigationView(navView)
+        }
+    }
+
+    private fun setupUserBar(){
+
+    }
 }
+

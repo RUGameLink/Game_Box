@@ -63,7 +63,6 @@ class LoadingActivity : AppCompatActivity() {
             }
             handler.postDelayed({
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("authCount", "false")
                 startActivity(intent)
                 finish()
 
