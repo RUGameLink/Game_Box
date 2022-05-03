@@ -25,9 +25,6 @@
             android:name="com.example.ticTacToeGame.Activity.GuessThePhoneNumberActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.ticTacToeGame.Activity.SoundPadActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.ticTacToeGame.Activity.LoadingActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
 

@@ -26,7 +26,7 @@
             app:layout_constraintHorizontal_bias="0.471"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.306"
+            app:layout_constraintVertical_bias="0.36"
             app:rippleColor="@color/wild_orchid" />
 
         <com.google.android.material.button.MaterialButton
@@ -46,7 +46,7 @@
             app:layout_constraintHorizontal_bias="0.471"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.433"
+            app:layout_constraintVertical_bias="0.467"
             app:rippleColor="@color/lyghter_green" />
 
         <com.google.android.material.button.MaterialButton
@@ -63,10 +63,10 @@
             app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.82"
+            app:layout_constraintVertical_bias="0.677"
             app:rippleColor="@color/orange1" />
 
         <com.google.android.material.button.MaterialButton
@@ -86,27 +86,8 @@
             app:layout_constraintHorizontal_bias="0.471"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.692"
+            app:layout_constraintVertical_bias="0.568"
             app:rippleColor="@color/deep_green" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/languageButton"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="305dp"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/mainly_blue"
-            android:text="@string/soundPad"
-            android:textColor="@color/white"
-            app:cornerRadius="15px"
-            app:icon="@drawable/sound"
-            app:iconSize="64px"
-            app:iconTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.471"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.56"
-            app:rippleColor="@color/mainly_green" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

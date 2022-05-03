@@ -10,14 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.FragmentTransaction
 import com.example.storybook.R
-import com.example.ticTacToeGame.Activity.SoundPadActivity
 import com.example.ticTacToeGame.Activity.TicTacToeActivity
 import com.example.ticTacToeGame.Activity.TimerActivity
 
 class MenuFragment : Fragment() {
     private lateinit var donateButton: Button
     private lateinit var ticTacToeButton: Button
-    private lateinit var soundPadButton: Button
     private lateinit var guessTheNumberButton: Button
     private lateinit var timerButton: Button
 
@@ -38,7 +36,6 @@ class MenuFragment : Fragment() {
         init(view)
         donateButton.setOnClickListener(myButtonClickListener)
         ticTacToeButton.setOnClickListener(ticTacToeListener)
-        soundPadButton.setOnClickListener(soundPadListener)
         guessTheNumberButton.setOnClickListener(guessTheNumberListener)
         timerButton.setOnClickListener(timerButtonListener)
 
@@ -47,10 +44,6 @@ class MenuFragment : Fragment() {
 
     private var timerButtonListener: View.OnClickListener = View.OnClickListener {
         timerGameShow()
-    }
-
-    private var soundPadListener: View.OnClickListener = View.OnClickListener {
-        soundPadShow()
     }
 
     private var ticTacToeListener: View.OnClickListener = View.OnClickListener {
@@ -89,15 +82,10 @@ class MenuFragment : Fragment() {
         startActivity(i)
     }
 
-    private fun soundPadShow(){
-        val i = Intent(getActivity(), SoundPadActivity::class.java)
-        startActivity(i)
-    }
 
     private fun init(view: View){
         donateButton = view.findViewById(R.id.db)
         ticTacToeButton = view.findViewById(R.id.tictactoeButton)!!
-        soundPadButton = view.findViewById(R.id.languageButton)
         guessTheNumberButton = view.findViewById(R.id.guessMyNumberButton)
         timerButton = view.findViewById(R.id.timerGameButton)
     }
