@@ -128,13 +128,6 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
 
-    //    filledPosition[clickTagDetector] = activePlayer
-
-         //Звуковое сопровождение
-
-
-    //    println(filledPosition[clickTagDetector])
-
         paintingLine()
         checkForWins()
     }
@@ -240,14 +233,6 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         b7.setOnClickListener(this)
         b8.setOnClickListener(this)
     }
-
-//    override fun onBackPressed() {
-//        if (shouldAllowBack()) {
-//            super.onBackPressed()
-//        } else {
-//            doSomething()
-//        }
-//    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         return if (keyCode == KeyEvent.KEYCODE_BACK) {

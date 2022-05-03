@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.example.storybook.R
+import com.example.ticTacToeGame.Games.Presets
 import com.example.ticTacToeGame.Games.TimerGame
 import com.example.ticTacToeGame.Services.TimerService
+import nl.dionsegijn.konfetti.xml.KonfettiView
 import kotlin.math.roundToInt
 
 class TimerActivity : AppCompatActivity() {
@@ -25,6 +27,7 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var timerButton: ImageButton
     private lateinit var timerView: TextView
     private lateinit var missionView: TextView
+    lateinit var viewKonfetti: KonfettiView
 
     private lateinit var timerGame: TimerGame
 
@@ -133,6 +136,7 @@ class TimerActivity : AppCompatActivity() {
     private fun checkStatus(){
         var res = timerGame.checkResult(timerView.text.toString())
         if(res) {
+            viewKonfetti.start(Presets.parade())
             timerView.setTextColor(applicationContext.getColor(R.color.lime_green))
             timerGame = TimerGame()
             missionView.text = "${timerGame.getGameTime()}"
@@ -142,7 +146,17 @@ class TimerActivity : AppCompatActivity() {
         println(res)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun toMain(){
+        val handler = Handler()
+        handler.postDelayed({
+            stopService(serviceIntent)
+            timerView.setTextColor(applicationContext.getColor(R.color.white))
+            timerView.text = getString(R.string.timer_text)
+            time = 0.0
+            timerStatus = 0
+        }, 100)
+
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
     }
@@ -167,5 +181,6 @@ class TimerActivity : AppCompatActivity() {
         timerButton = findViewById(R.id.startStopButton)
         missionView = findViewById(R.id.missionView)
         serviceIntent = Intent(applicationContext, TimerService::class.java)
+        viewKonfetti = findViewById(R.id.konfettiView)
     }
 }

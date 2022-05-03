@@ -13,7 +13,7 @@ class TimerGame {
     fun generateGameTime() {
         random = Random()
         var secondCount = random.nextInt(((3 - 1) - 1) + 1)
-        var thirdCount = random.nextInt(((59 - 9) - 9) + 9)
+        var thirdCount = (19 until 59).random()
 
         gameTime = makeTimeString( secondCount, thirdCount)
     }
