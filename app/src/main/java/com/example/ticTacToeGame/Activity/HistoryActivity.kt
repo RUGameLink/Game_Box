@@ -2,9 +2,11 @@ package com.example.ticTacToeGame.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import com.example.ticTacToeGame.UserData.UserData
 import com.example.ticTacToeGame.UserData.UserDataAdapter
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import io.github.muddz.styleabletoast.StyleableToast
 
 class HistoryActivity : AppCompatActivity()  {
     private lateinit var historyView: RecyclerView
@@ -35,80 +38,84 @@ class HistoryActivity : AppCompatActivity()  {
         userData = UserData()
         getInfoFromDB()
 
-        val recyclerView: RecyclerView = findViewById(R.id.historyView)
-        val linearLayoutManager = LinearLayoutManager(applicationContext)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        recyclerView.layoutManager = linearLayoutManager
-        recyclerView.adapter = UserDataAdapter(userData)
-
         hideBars()
 
     }
 
 
     private fun getInfoFromDB(){
-        database.getReference(auth).child("guessTheGamePhoneGamesCount").get().addOnSuccessListener{
-            var guessTheGamePhoneGamesCount = it.value
-            if(guessTheGamePhoneGamesCount == null)
-                userData.guessTheGamePhoneWins = 0
-            else
-                userData.guessTheGamePhoneWins = guessTheGamePhoneGamesCount.toString().toInt()
-        }
-
-        database.getReference(auth).child("guessTheGameUserGamesCount").get().addOnSuccessListener{
-            var guessTheGameUserGamesCount = it.value
-            if(guessTheGameUserGamesCount == null)
-                userData.guessTheGameUserWins = 0
-            else
-                userData.guessTheGameUserWins = guessTheGameUserGamesCount.toString().toInt()
-        }
-
-        database.getReference(auth).child("timerAllGamesCount").get().addOnSuccessListener {
-            var timerAllGamesCount = it.value
-            if (timerAllGamesCount == null)
-                userData.timerTotalCount = 0
-            else
-                userData.timerTotalCount = timerAllGamesCount.toString().toInt()
-        }
-
-        database.getReference(auth).child("timerWinsCount").get().addOnSuccessListener {
-            var timerWinsCount = it.value
+        database.getReference(auth).get().addOnSuccessListener {
+            var timerWinsCount = it.child("timerWinsCount").value
             if (timerWinsCount == null)
                 userData.timerWinsCount = 0
             else
                 userData.timerWinsCount = timerWinsCount.toString().toInt()
-        }
 
-        database.getReference(auth).child("ticTacToeAllGamesCount").get().addOnSuccessListener {
-            var ticTacToeAllGamesCount = it.value
-            if (ticTacToeAllGamesCount == null)
-                userData.ticTacToeAllGamesCount = 0
+            //////
+
+            var timerAllGamesCount = it.child("timerAllGamesCount").value
+            if (timerAllGamesCount == null)
+                userData.timerTotalCount = 0
             else
-                userData.ticTacToeAllGamesCount = ticTacToeAllGamesCount.toString().toInt()
-        }
+                userData.timerTotalCount = timerAllGamesCount.toString().toInt()
 
-        database.getReference(auth).child("ticTacToeCrossWinsCount").get().addOnSuccessListener {
-            var ticTacToeCrossWinsCount = it.value
-            if (ticTacToeCrossWinsCount == null)
-                userData.ticTacToeCrossWinsCount = 0
-            else
-                userData.ticTacToeDrawCount = ticTacToeCrossWinsCount.toString().toInt()
-        }
+            //////
 
-        database.getReference(auth).child("ticTacToeZeroWinsCount").get().addOnSuccessListener {
-            var ticTacToeZeroWinsCount = it.value
-            if (ticTacToeZeroWinsCount == null)
-                userData.ticTacToeZeroWinsCount = 0
-            else
-                userData.ticTacToeZeroWinsCount = ticTacToeZeroWinsCount.toString().toInt()
-        }
-
-        database.getReference(auth).child("ticTacToeDrawCount").get().addOnSuccessListener {
-            var ticTacToeDrawCount = it.value
+            var ticTacToeDrawCount = it.child("ticTacToeDrawCount").value
             if (ticTacToeDrawCount == null)
                 userData.ticTacToeDrawCount = 0
             else
                 userData.ticTacToeDrawCount = ticTacToeDrawCount.toString().toInt()
+
+            ///////
+
+            var ticTacToeZeroWinsCount = it.child("ticTacToeZeroWinsCount").value
+            if (ticTacToeZeroWinsCount == null)
+                userData.ticTacToeZeroWinsCount = 0
+            else
+                userData.ticTacToeZeroWinsCount = ticTacToeZeroWinsCount.toString().toInt()
+
+            //////
+
+            var ticTacToeCrossWinsCount = it.child("ticTacToeCrossWinsCount").value
+            if (ticTacToeCrossWinsCount == null)
+                userData.ticTacToeCrossWinsCount = 0
+            else
+                userData.ticTacToeCrossWinsCount = ticTacToeCrossWinsCount.toString().toInt()
+
+            //////
+
+            var ticTacToeAllGamesCount = it.child("ticTacToeAllGamesCount").value
+            if (ticTacToeAllGamesCount == null)
+                userData.ticTacToeAllGamesCount = 0
+            else
+                userData.ticTacToeAllGamesCount = ticTacToeAllGamesCount.toString().toInt()
+
+            ///////
+
+            var guessTheGameUserGamesCount = it.child("guessTheGameUserGamesCount").value
+            if(guessTheGameUserGamesCount == null)
+                userData.guessTheGameUserWins = 0
+            else
+                userData.guessTheGameUserWins = guessTheGameUserGamesCount.toString().toInt()
+
+            /////
+
+            var guessTheGamePhoneGamesCount = it.child("guessTheGamePhoneGamesCount").value
+            if(guessTheGamePhoneGamesCount == null)
+                userData.guessTheGamePhoneWins = 0
+            else
+                userData.guessTheGamePhoneWins = guessTheGamePhoneGamesCount.toString().toInt()
+
+            ////
+
+            val recyclerView: RecyclerView = findViewById(R.id.historyView)
+            val linearLayoutManager = LinearLayoutManager(applicationContext)
+            linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+            recyclerView.layoutManager = linearLayoutManager
+            recyclerView.adapter = UserDataAdapter(userData)
+        }.addOnFailureListener{
+            StyleableToast.makeText(applicationContext, getText(R.string.loading_history_error).toString(), Toast.LENGTH_SHORT, R.style.negative_toast).show()
         }
     }
 

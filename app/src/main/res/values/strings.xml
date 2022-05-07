@@ -82,4 +82,5 @@
     <string name="guess_num_stat">Статистика "Угадай число"</string>
     <string name="guess_num_phone_wins">Телефон угадал ваше число:</string>
     <string name="guess_num_user_wins">Вы угадали число:</string>
+    <string name="loading_history_error">Ошибка загрузки истории</string>
 </resources>
