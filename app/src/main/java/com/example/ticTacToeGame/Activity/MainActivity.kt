@@ -288,6 +288,7 @@ class MainActivity : AppCompatActivity() {
         else{
             check = false
             showNavigationView(navView)
+            menuFragmentShow()
         }
     }
 
