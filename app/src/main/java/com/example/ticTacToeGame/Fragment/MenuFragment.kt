@@ -19,6 +19,7 @@ class MenuFragment : Fragment() {
     private lateinit var guessTheNumberButton: Button
     private lateinit var timerButton: Button
 
+    private lateinit var auth: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +39,9 @@ class MenuFragment : Fragment() {
         ticTacToeButton.setOnClickListener(ticTacToeListener)
         guessTheNumberButton.setOnClickListener(guessTheNumberListener)
         timerButton.setOnClickListener(timerButtonListener)
+
+        auth = requireArguments().getString("uid").toString()
+        println("authTest: ${auth}")
 
         return view
     }
@@ -59,7 +63,10 @@ class MenuFragment : Fragment() {
     }
 
     private fun guessTheNumberShow(){
+        val bundle = Bundle()
+        bundle.putString("uid", auth)
         val guessGameFragment = guessGameFragment()
+        guessGameFragment.arguments = bundle
         var fragmentTransaction :FragmentTransaction = requireFragmentManager().beginTransaction()
         fragmentTransaction.replace(R.id.menuFrame, guessGameFragment)
         fragmentTransaction.commit()
@@ -74,11 +81,13 @@ class MenuFragment : Fragment() {
 
     private fun timerGameShow(){
         val i = Intent(getActivity(), TimerActivity::class.java)
+        i.putExtra("uid", auth)
         startActivity(i)
     }
 
     private fun ticTacToeShow(){
         val i = Intent(getActivity(), TicTacToeActivity::class.java)
+        i.putExtra("uid", auth)
         startActivity(i)
     }
 

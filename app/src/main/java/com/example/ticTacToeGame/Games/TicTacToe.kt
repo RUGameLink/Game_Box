@@ -8,6 +8,11 @@ class TicTacToe {
 
     private var activePlayer: Int
 
+    private var totalGameCount: Int
+    private var crossWinsCount: Int
+    private var zeroWinsCount: Int
+    private var drawCount: Int
+
 
     private var gameActive: Boolean
 
@@ -19,6 +24,12 @@ class TicTacToe {
         filledPosition = intArrayOf(-1, -1, -1, -1, -1, -1, -1, -1, -1)
         activePlayer = playerOne
         gameActive = true
+
+        totalGameCount = 0
+        crossWinsCount = 0
+        zeroWinsCount = 0
+        drawCount = 0
+
     }
 
     fun checkForWins(): Int{
@@ -113,6 +124,43 @@ class TicTacToe {
             res = 8
         }
         return res
+    }
+
+    fun setCrossWinsCount(count: Int){
+        crossWinsCount = count
+        crossWinsCount ++
+    }
+
+    fun getCrossWinsCount(): Int{
+        return crossWinsCount
+    }
+
+    fun setZeroWinsCount(count: Int){
+        zeroWinsCount = count
+        zeroWinsCount ++
+    }
+
+    fun getZeroWinsCount(): Int{
+
+        return zeroWinsCount
+    }
+
+    fun setDrawWinsCount(count: Int){
+        drawCount = count
+        drawCount ++
+    }
+
+    fun getDrawCount(): Int{
+        return drawCount
+    }
+
+    fun setTotalGamesCount(count: Int){
+        totalGameCount = count
+        totalGameCount ++
+    }
+
+    fun getTotalGamesCount(): Int{
+        return totalGameCount
     }
 
 }

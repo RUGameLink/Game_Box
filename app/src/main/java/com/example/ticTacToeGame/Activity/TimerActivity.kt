@@ -4,21 +4,21 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import com.example.storybook.R
-import com.example.ticTacToeGame.Games.Presets
+import com.example.ticTacToeGame.Services.Presets
 import com.example.ticTacToeGame.Games.TimerGame
 import com.example.ticTacToeGame.Services.TimerService
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import nl.dionsegijn.konfetti.xml.KonfettiView
 import kotlin.math.roundToInt
 
@@ -40,6 +40,9 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var adapter: ArrayAdapter<String>
 
 
+    private val database = Firebase.database("https://gameboxapp-42309-default-rtdb.europe-west1.firebasedatabase.app")
+    private lateinit var auth: String
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +57,9 @@ class TimerActivity : AppCompatActivity() {
         timerButton.setOnClickListener(timerButtonListener)
 
         hideBars()
+
+        auth = intent.getStringExtra("uid").toString()
+        println("Auth Timer ${auth}")
     }
     private var updateTime : BroadcastReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context, intent: Intent) {
@@ -90,6 +96,7 @@ class TimerActivity : AppCompatActivity() {
 
     private fun makeTimeString(hour: Int, minute: Int, second: Int): String = String.format("%02d:%02d:%02d", hour, minute, second)
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private var backListener: View.OnClickListener = View.OnClickListener {
         toMain()
     }
@@ -137,13 +144,52 @@ class TimerActivity : AppCompatActivity() {
         var res = timerGame.checkResult(timerView.text.toString())
         if(res) {
             viewKonfetti.start(Presets.parade())
+            setTotalGameDB()
+            setWinsCountDB()
             timerView.setTextColor(applicationContext.getColor(R.color.lime_green))
             timerGame = TimerGame()
             missionView.text = "${timerGame.getGameTime()}"
         }
-        else
+        else{
             timerView.setTextColor(applicationContext.getColor(R.color.crimson))
+            setTotalGameDB()
+        }
+
         println(res)
+    }
+
+    private fun setTotalGameDB(){
+        database.getReference(auth).child("timerAllGamesCount").get().addOnSuccessListener {
+            var toTalGameCount = it.value
+            if(toTalGameCount == null){
+                timerGame.setTotalGamesCount(0)
+                database.getReference(auth).child("timerAllGamesCount").setValue(timerGame.getTotalGamesCount())
+            }
+            else{
+                var res = toTalGameCount.toString().toInt()
+                timerGame.setTotalGamesCount(res)
+                database.getReference(auth).child("timerAllGamesCount").setValue(timerGame.getTotalGamesCount())
+            }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+        }
+    }
+
+    private fun setWinsCountDB(){
+        database.getReference(auth).child("timerWinsCount").get().addOnSuccessListener {
+            var timerWinsCount = it.value
+            if(timerWinsCount == null){
+                timerGame.setTimerWinsCount(0)
+                database.getReference(auth).child("timerWinsCount").setValue(timerGame.getTimerWinsCount())
+            }
+            else{
+                var res = timerWinsCount.toString().toInt()
+                timerGame.setTimerWinsCount(res)
+                database.getReference(auth).child("timerWinsCount").setValue(timerGame.getTimerWinsCount())
+            }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

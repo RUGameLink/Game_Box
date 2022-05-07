@@ -18,14 +18,19 @@ class GuessTheGame {
 
     private var number by Delegates.notNull<Int>()
 
+    private var phoneWinsCount: Int = 0
+    private var userWinsCount: Int = 0
+
     constructor(max: Int, min: Int){
         maxCount = max
         minCount = min
+        userWinsCount = 0
     }
 
     constructor(max: Int, min: Int, boolean: Boolean){
         maxCount = max
         minCount = min
+        phoneWinsCount = 0
     }
 
     fun generateNumber(){
@@ -82,5 +87,23 @@ class GuessTheGame {
 
     fun lessNum(){
         maxCount = midCount
+    }
+
+    fun setPhoneWinsCount(count: Int){
+        phoneWinsCount = count
+        phoneWinsCount ++
+    }
+
+    fun getPhoneWinsCount(): Int{
+        return phoneWinsCount
+    }
+
+    fun getUserWinsCount(): Int{
+        return userWinsCount
+    }
+
+    fun setUserWinsCount(count: Int){
+        userWinsCount = count
+        userWinsCount ++
     }
 }

@@ -3,6 +3,7 @@ package com.example.ticTacToeGame.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
@@ -11,7 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storybook.R
 import com.example.ticTacToe.Games.GuessTheGame
-import com.example.ticTacToeGame.Games.Presets
+import com.example.ticTacToeGame.Services.Presets
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import io.github.muddz.styleabletoast.StyleableToast
 import nl.dionsegijn.konfetti.xml.KonfettiView
 import kotlin.properties.Delegates
@@ -33,6 +36,9 @@ class GuessTheNumberActivity: AppCompatActivity() {
     private var maxCount by Delegates.notNull<Int>()
     private var minCount by Delegates.notNull<Int>()
 
+    private val database = Firebase.database("https://gameboxapp-42309-default-rtdb.europe-west1.firebasedatabase.app")
+    private lateinit var auth: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_guessthenumber)
@@ -50,6 +56,9 @@ class GuessTheNumberActivity: AppCompatActivity() {
         equalButton.setOnClickListener(equalButtonListener)
         backButton.setOnClickListener(backListener)
         hideBars()
+
+        auth = intent.getStringExtra("uid").toString()
+        println("Auth Guess V1 ${auth}")
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -103,7 +112,25 @@ class GuessTheNumberActivity: AppCompatActivity() {
         }
     }
 
+    private fun setPhoneGameDB(){
+        database.getReference(auth).child("guessTheGamePhoneGamesCount").get().addOnSuccessListener {
+            var toTalGameCount = it.value
+            if(toTalGameCount == null){
+                guessTheGame.setPhoneWinsCount(0)
+                database.getReference(auth).child("guessTheGamePhoneGamesCount").setValue(guessTheGame.getPhoneWinsCount())
+            }
+            else{
+                var res = toTalGameCount.toString().toInt()
+                guessTheGame.setPhoneWinsCount(res)
+                database.getReference(auth).child("guessTheGamePhoneGamesCount").setValue(guessTheGame.getPhoneWinsCount())
+            }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+        }
+    }
+
     private fun endGame(){
+        setPhoneGameDB()
         StyleableToast.makeText(applicationContext, getText(R.string.end_guess_game).toString(), Toast.LENGTH_SHORT, R.style.positive_toast).show()
 
         val handler = Handler()

@@ -22,6 +22,7 @@ class guessGameFragment : Fragment() {
     lateinit var guessMyNumberButton: Button
     lateinit var guessPhNumberButton: Button
 
+    private lateinit var auth: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,8 @@ class guessGameFragment : Fragment() {
         backButton.setOnClickListener(backListener)
         guessMyNumberButton.setOnClickListener(myNumberListener)
         guessPhNumberButton.setOnClickListener(PhNumberListener)
+
+        auth = requireArguments().getString("uid").toString()
         return view
     }
 
@@ -79,6 +82,7 @@ class guessGameFragment : Fragment() {
                     val i = Intent(activity, GuessTheNumberActivity::class.java)
                     i.putExtra("minCount", minCount)
                     i.putExtra("maxCount", maxCount)
+                    i.putExtra("uid", auth)
                     startActivity(i)
                 }
             }
@@ -115,6 +119,7 @@ class guessGameFragment : Fragment() {
                     val i = Intent(activity, GuessThePhoneNumberActivity::class.java)
                     i.putExtra("minCount", minCount)
                     i.putExtra("maxCount", maxCount)
+                    i.putExtra("uid", auth)
                     startActivity(i)
                 }
             }
@@ -123,7 +128,10 @@ class guessGameFragment : Fragment() {
     }
 
     private fun menuShow(){
+        val bundle = Bundle()
+        bundle.putString("uid", auth)
         val menuFragment = MenuFragment()
+        menuFragment.arguments = bundle
         var fragmentTransaction : FragmentTransaction = requireFragmentManager().beginTransaction()
         fragmentTransaction.replace(R.id.menuFrame, menuFragment)
         fragmentTransaction.commit()

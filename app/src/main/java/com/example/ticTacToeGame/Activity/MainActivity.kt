@@ -33,6 +33,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -84,6 +85,9 @@ class MainActivity : AppCompatActivity() {
                 println("ApiException")
             }
         }
+
+
+
         checkAuthState(navView)
 
         navView.setNavigationItemSelectedListener {
@@ -118,7 +122,9 @@ class MainActivity : AppCompatActivity() {
                         dialog.dismiss()
                     }
                 }
-                R.id.history -> Toast.makeText(applicationContext, "История", Toast.LENGTH_SHORT).show()
+                R.id.history -> {
+                    showHistory()
+                }
                 R.id.logout -> {
                     drawerLayout.close()
                     auth.signOut()
@@ -137,11 +143,16 @@ class MainActivity : AppCompatActivity() {
 
 
         checkaDate()
-        menuFragmentShow()
 
         hideBars()
 
         menuButton.setOnClickListener(menuListener)
+    }
+
+    private fun showHistory() {
+        val i = Intent(applicationContext, HistoryActivity::class.java)
+        i.putExtra("uid", auth.uid)
+        startActivity(i)
     }
 
     private fun showNavigationView(navView: NavigationView){
@@ -195,8 +206,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun menuFragmentShow(){
-
+        val bundle = Bundle()
+        bundle.putString("uid", auth.uid)
         menuFragment = MenuFragment()
+        menuFragment.arguments = bundle
         var fragmentTransaction :FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(menuFrame.id, menuFragment)
         fragmentTransaction.commit()
@@ -254,7 +267,9 @@ class MainActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
+
                 checkAuthState(navView)
+                menuFragmentShow()
             }
             else{
                 check = false
@@ -265,8 +280,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAuthState(navView: NavigationView){
         if(auth.currentUser != null){
+            println("authTET ${auth.uid}")
             check = true
             showNavigationView(navView)
+            menuFragmentShow()
         }
         else{
             check = false
@@ -274,8 +291,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupUserBar(){
 
-    }
 }
 

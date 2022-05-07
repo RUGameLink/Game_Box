@@ -1,4 +1,4 @@
-package com.example.ticTacToeGame.Games
+package com.example.ticTacToeGame.Services
 
 import android.icu.lang.UCharacter.DecompositionType.SMALL
 import android.util.Size

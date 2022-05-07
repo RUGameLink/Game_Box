@@ -4,6 +4,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
@@ -11,13 +12,11 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storybook.R
-import com.example.ticTacToeGame.Games.Presets
+import com.example.ticTacToeGame.Services.Presets
 import com.example.ticTacToeGame.Games.TicTacToe
-import nl.dionsegijn.konfetti.core.Party
-import nl.dionsegijn.konfetti.core.Position
-import nl.dionsegijn.konfetti.core.emitter.Emitter
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import nl.dionsegijn.konfetti.xml.KonfettiView
-import java.util.concurrent.TimeUnit
 
 
 class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
@@ -39,14 +38,11 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var mp: MediaPlayer
 
-
-
-
-
-
     lateinit var ticTacToe: TicTacToe
 
 
+    private val database = Firebase.database("https://gameboxapp-42309-default-rtdb.europe-west1.firebasedatabase.app")
+    private lateinit var auth: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +55,8 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
         initListener()
 
         hideBars()
+        auth = intent.getStringExtra("uid").toString()
+        println("Auth Tic Tac ${auth}")
     }
 
     private fun hideBars() {
@@ -138,11 +136,91 @@ class TicTacToeActivity : AppCompatActivity(), View.OnClickListener {
 
         when(result){
             1 -> {viewKonfetti.start(Presets.parade())
-                turnView.setText(R.string.playerOneWin)}
+                turnView.setText(R.string.playerOneWin)
+
+                setTotalGameDB()
+                setCrossGameDB()
+            }
             2 -> {viewKonfetti.start(Presets.parade())
-                turnView.setText(R.string.playerTwoWin)}
+                turnView.setText(R.string.playerTwoWin)
+
+                setTotalGameDB()
+                setZeroGameDB()
+            }
             0 -> {viewKonfetti.start(Presets.rain())
-                turnView.setText(R.string.drawGame)}
+                turnView.setText(R.string.drawGame)
+
+                setTotalGameDB()
+                setDrawGameDB()
+            }
+        }
+    }
+
+    private fun setTotalGameDB(){
+        database.getReference(auth).child("ticTacToeAllGamesCount").get().addOnSuccessListener {
+            var toTalGameCount = it.value
+            if(toTalGameCount == null){
+                ticTacToe.setTotalGamesCount(0)
+                database.getReference(auth).child("ticTacToeAllGamesCount").setValue(ticTacToe.getTotalGamesCount())
+            }
+            else{
+                var res = toTalGameCount.toString().toInt()
+                ticTacToe.setTotalGamesCount(res)
+                database.getReference(auth).child("ticTacToeAllGamesCount").setValue(ticTacToe.getTotalGamesCount())
+            }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+        }
+    }
+
+    private fun setCrossGameDB(){
+        database.getReference(auth).child("ticTacToeCrossWinsCount").get().addOnSuccessListener {
+            var crossWinsCount = it.value
+            if(crossWinsCount == null){
+                ticTacToe.setCrossWinsCount(0)
+                database.getReference(auth).child("ticTacToeCrossWinsCount").setValue(ticTacToe.getCrossWinsCount())
+            }
+            else{
+                var res = crossWinsCount.toString().toInt()
+                ticTacToe.setCrossWinsCount(res)
+                database.getReference(auth).child("ticTacToeCrossWinsCount").setValue(ticTacToe.getCrossWinsCount())
+            }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+        }
+    }
+
+    private fun setZeroGameDB(){
+        database.getReference(auth).child("ticTacToeZeroWinsCount").get().addOnSuccessListener {
+            var zeroWinsCount = it.value
+            if(zeroWinsCount == null){
+                ticTacToe.setZeroWinsCount(0)
+                database.getReference(auth).child("ticTacToeZeroWinsCount").setValue(ticTacToe.getZeroWinsCount())
+            }
+            else{
+                var res = zeroWinsCount.toString().toInt()
+                ticTacToe.setZeroWinsCount(res)
+                database.getReference(auth).child("ticTacToeZeroWinsCount").setValue(ticTacToe.getZeroWinsCount())
+            }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+        }
+    }
+
+    private fun setDrawGameDB(){
+        database.getReference(auth).child("ticTacToeDrawCount").get().addOnSuccessListener {
+            var drawCount = it.value
+            if(drawCount == null){
+                ticTacToe.setDrawWinsCount(0)
+                database.getReference(auth).child("ticTacToeDrawCount").setValue(ticTacToe.getDrawCount())
+            }
+            else{
+                var res = drawCount.toString().toInt()
+                ticTacToe.setDrawWinsCount(res)
+                database.getReference(auth).child("ticTacToeDrawCount").setValue(ticTacToe.getDrawCount())
+            }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
         }
     }
 

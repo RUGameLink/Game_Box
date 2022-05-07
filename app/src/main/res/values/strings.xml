@@ -67,4 +67,19 @@
     <string name="rus_language">Русский язык</string>
     <string name="usa_language">Английский язык</string>
     <string name="select_language_ok">Выбрать язык</string>
+
+
+    <string name="tic_tac_toe_stat">Статистика "Крестики-Нолики"</string>
+    <string name="tic_tac_toe_total_games">Всего игр сыграно:</string>
+    <string name="tic_tac_toe_cross_wins">Побед Крестиков:</string>
+    <string name="tic_tac_toe_zero_wins">Побед Ноликов:</string>
+    <string name="tic_tac_toe_draw_count">Количество ничьех:</string>
+
+    <string name="timer_stat">Статистика "Останови время"</string>
+    <string name="timer_total_games">Всего попыток остановить время:</string>
+    <string name="timer_wins">Время успешно остановлено:</string>
+
+    <string name="guess_num_stat">Статистика "Угадай число"</string>
+    <string name="guess_num_phone_wins">Телефон угадал ваше число:</string>
+    <string name="guess_num_user_wins">Вы угадали число:</string>
 </resources>
