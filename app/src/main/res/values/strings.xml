@@ -59,7 +59,7 @@
     <string name="google_auth">Google-аккаунт</string>
 
 
-    <string name="history">История</string>
+    <string name="history">Статистика</string>
     <string name="languages">Изменить язык</string>
     <string name="logout">Выйти из аккаунта</string>
 
@@ -73,7 +73,7 @@
     <string name="tic_tac_toe_total_games">Всего игр сыграно:</string>
     <string name="tic_tac_toe_cross_wins">Побед Крестиков:</string>
     <string name="tic_tac_toe_zero_wins">Побед Ноликов:</string>
-    <string name="tic_tac_toe_draw_count">Количество ничьех:</string>
+    <string name="tic_tac_toe_draw_count">Количество ничейных:</string>
 
     <string name="timer_stat">Статистика "Останови время"</string>
     <string name="timer_total_games">Всего попыток остановить время:</string>
